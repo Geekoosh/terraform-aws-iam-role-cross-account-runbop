@@ -1,0 +1,4 @@
+{
+  "release-type": "terraform-module",
+  "package-name": "aws_iam_role_cross_account_runbop"
+}
