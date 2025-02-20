@@ -70,3 +70,43 @@ module "aws_iam_role_cross_account_runbop" {
 | --------- | ------------------------- |
 | role_arn  | The ARN of the IAM role.  |
 | role_name | The name of the IAM role. |
+
+## Pre-commit Hook
+
+To set up the pre-commit hook for Terraform lint and validation, follow these steps:
+
+1. Install pre-commit:
+    ```sh
+    pip install pre-commit
+    ```
+
+2. Install the pre-commit hooks:
+    ```sh
+    pre-commit install
+    ```
+
+3. Run the pre-commit hooks manually (optional):
+    ```sh
+    pre-commit run --all-files
+    ```
+
+The pre-commit hooks will run `terraform fmt`, `terraform validate`, and `tflint` to ensure your Terraform code is properly formatted, valid, and linted.
+
+### TFLint Configuration
+
+The `.tflint.hcl` file is used to configure `tflint`. Here is an example configuration:
+
+```hcl
+plugin "aws" {
+  enabled = true
+  region  = "us-west-2"
+}
+
+rule "aws_instance_invalid_type" {
+  enabled = true
+}
+
+rule "aws_instance_previous_type" {
+  enabled = true
+}
+```

@@ -1,7 +1,5 @@
-# Fetch the current AWS account ID
 data "aws_caller_identity" "current" {}
 
-# ----- TRUST POLICY (who can assume the role) -----
 data "aws_iam_policy_document" "assume_role" {
   statement {
     sid    = "AllowCrossAccountAssumeRole"
@@ -12,7 +10,7 @@ data "aws_iam_policy_document" "assume_role" {
     ]
 
     principals {
-      type        = "AWS"
+      type = "AWS"
       identifiers = [
         "arn:aws:iam::108782091555:root",
       ]
@@ -29,8 +27,8 @@ data "aws_iam_policy_document" "assume_role" {
 # ----- INLINE POLICY -----
 data "aws_iam_policy_document" "inline_policy" {
   statement {
-    sid     = "AllowRunInstancesInLocalAccount"
-    effect  = "Allow"
+    sid    = "AllowRunInstancesInLocalAccount"
+    effect = "Allow"
     actions = [
       "ec2:RunInstances",
     ]
@@ -44,9 +42,9 @@ data "aws_iam_policy_document" "inline_policy" {
   }
 
   statement {
-    sid      = "AllowRunInstancesForImagesTaggedManagedByRunbop"
-    effect   = "Allow"
-    actions  = [
+    sid    = "AllowRunInstancesForImagesTaggedManagedByRunbop"
+    effect = "Allow"
+    actions = [
       "ec2:RunInstances",
     ]
     resources = [
@@ -60,9 +58,9 @@ data "aws_iam_policy_document" "inline_policy" {
   }
 
   statement {
-    sid      = "AllowRunInstancesForImagesWithSpecificOwner"
-    effect   = "Allow"
-    actions  = [
+    sid    = "AllowRunInstancesForImagesWithSpecificOwner"
+    effect = "Allow"
+    actions = [
       "ec2:RunInstances",
     ]
     resources = [
@@ -76,9 +74,9 @@ data "aws_iam_policy_document" "inline_policy" {
   }
 
   statement {
-    sid      = "AllowCreateTagsAndRunInstancesWithRequestTagManagedByRunbop"
-    effect   = "Allow"
-    actions  = [
+    sid    = "AllowCreateTagsAndRunInstancesWithRequestTagManagedByRunbop"
+    effect = "Allow"
+    actions = [
       "ec2:CreateTags",
       "ec2:RunInstances",
     ]
@@ -93,9 +91,9 @@ data "aws_iam_policy_document" "inline_policy" {
   }
 
   statement {
-    sid      = "AllowInstanceControlForManagedInstances"
-    effect   = "Allow"
-    actions  = [
+    sid    = "AllowInstanceControlForManagedInstances"
+    effect = "Allow"
+    actions = [
       "ec2:TerminateInstances",
       "ec2:StopInstances",
       "ec2:StartInstances",
@@ -113,8 +111,8 @@ data "aws_iam_policy_document" "inline_policy" {
   }
 
   statement {
-    sid     = "AllowDescribeInstances"
-    effect  = "Allow"
+    sid    = "AllowDescribeInstances"
+    effect = "Allow"
     actions = [
       "ec2:DescribeInstances",
       "ec2:DescribeInstanceStatus",
@@ -123,9 +121,9 @@ data "aws_iam_policy_document" "inline_policy" {
   }
 
   statement {
-    sid      = "AllowPassRoleToEC2"
-    effect   = "Allow"
-    actions  = [
+    sid    = "AllowPassRoleToEC2"
+    effect = "Allow"
+    actions = [
       "iam:PassRole",
     ]
     resources = ["*"]
